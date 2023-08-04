@@ -6,48 +6,47 @@ import java.util.LinkedList;
 import java.util.List;
 public class lists
 {
-    public static int RandnrGenerator(){
-        Random random = new Random();
-        return(random.nextInt(100));
+
+   
+    public static LinkedList Listgenerator(){
+
+        LinkedList<Integer> randlist = new LinkedList<Integer>();
+
+        for (int i = 0; i < 10; i++){
+
+            Random random = new Random();
+
+            randlist.add(random.nextInt(100));
+
+        }
+        return(randlist);
+
     }
 
-    public static void main(String args[])
-    {
-        List numbers2 = new LinkedList();
-
-        List evennumbers = new LinkedList();
-
-        List dividable3numbs = new LinkedList();
-
-        List dividable5numbs = new LinkedList();
-
-        List remainingnumbs = new LinkedList();
-
+    
+    public static int Maxcheck(LinkedList<Integer> inputlist){
 
         int maxvalue = 0;
 
-        int minvalue1 = 101;
-
-        int minvalue2 =101;
-
-
-
-        // To be separated, here the list is generated, the minimal two numbers are found and the largerst one
-        // make into generate list class, find max class, find sum 2 minimum values.
-        // When putting in classes, also think about taking the instatiation of the minimum and maximun values.
-
         for (int i = 0; i < 10; i++){
-            
-            numbers2.add(RandnrGenerator());
-
-            int num = (Integer)numbers2.get(i);
-
-            
-
+            int num = inputlist.get(i);
 
             if(num > maxvalue){
-                maxvalue = num;
+               maxvalue = num;
             }
+        }
+        return(maxvalue);
+    }
+
+
+ 
+    public static int sumof2min(LinkedList<Integer> inputlist){
+
+        int minvalue1 = 101;
+        int minvalue2 = 101;
+
+        for (int i = 0; i < 10; i++){
+            int num = inputlist.get(i);
 
             if(num < minvalue1){
                 minvalue2 = minvalue1;
@@ -58,73 +57,152 @@ public class lists
                 minvalue2 = num;
             }
 
-            
-           
         }
 
+        int sum2min = minvalue1 + minvalue2;
+
+        return(sum2min);
+
+    }
+
+    public static LinkedList<Integer> Evennumlist(LinkedList<Integer> inputlist){
+
+        LinkedList<Integer> evennums = new LinkedList<Integer>();
 
 
-        //Put all of this in one class, also think about the instatiation of the lists
+        for (int i = 0; i <10; i++){
 
-        for (int i = 0; i < 10; i++){
-            int num = (Integer)numbers2.get(i);
+            int num = inputlist.get(i);
 
             if(num % 2 == 0){
-                evennumbers.add(num);
+
+                evennums.add(num);
             }
+        }
+
+        return(evennums);
+    }
+
+  
+    public static LinkedList<Integer> Dividableby3(LinkedList<Integer> inputlist){
+
+        LinkedList<Integer> dividby3 = new LinkedList<Integer>();
+
+
+        for (int i = 0; i <10; i++){
+
+            int num = inputlist.get(i);
 
             if(num % 3 == 0){
-                dividable3numbs.add(num);
+
+                dividby3.add(num);
             }
+        }
+
+        return(dividby3);
+    }
+
+
+    public static LinkedList<Integer> Dividableby5(LinkedList<Integer> inputlist){
+
+        LinkedList<Integer> dividby5 = new LinkedList<Integer>();
+
+
+        for (int i = 0; i <10; i++){
+
+            int num = inputlist.get(i);
 
             if(num % 5 == 0){
-                dividable5numbs.add(num);
+
+                dividby5.add(num);
             }
+        }
+        return(dividby5);
+    }
+
+ 
+    public static LinkedList<Integer> Undividable(LinkedList<Integer> inputlist){
+
+        LinkedList<Integer> undivid = new LinkedList<Integer>();
+
+
+        for (int i = 0; i <10; i++){
+
+            int num = inputlist.get(i);
 
             if(num % 2 != 0 && num % 3 != 0 && num%5 !=0){
-                remainingnumbs.add(num);
-            }
 
+                undivid.add(num);
+            }          
         }
-        int a =1;
+        return(undivid);
+    }
 
+    
 
-        //Bubblesort, still to put all the different "functions" in different classes so it looks more tidy
-        for (int i = 0; i < numbers2.size(); i++){
-            System.out.println("OUTER!!!!!!!!!!!!!!!!!!!!!!!!!");
-            for(int j = 0; j < (numbers2.size() - i); j++){  
-                System.out.println("inner");
+    public static void bubbleSort(ArrayList<Integer> list) {
+        int n = list.size();
 
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
+
+            for (int j = 0; j < n - i - 1; j++) {
+
+                if (list.get(j) > list.get(j + 1)) {
+                    
+                    int temp = list.get(j);
+
+                    list.set(j, list.get(j + 1));
+
+                    list.set(j + 1, temp);
+
+                    swapped = true;
+
+                }
             }
-            //int num = (Integer)numbers2.get(i);
-            //int num2 = (Integer)numbers2.get(i+1);
-            //System.out.println("num" + a);
-            //a = a+1;
-            //System.out.println(num);
+
             
-            //System.out.println(num);
-
+            if (!swapped) {
+                break;
+            }
         }
-           
-        System.out.println("The generated random nr list is: " + numbers2.toString());
+    }
+    
 
-        System.out.println("The even numbers are: " + evennumbers.toString());
+    
+  
+    public static void main(String args[])
+    {
 
-        System.out.println("The numbers dividable by 3 are: " + dividable3numbs.toString());
+        LinkedList<Integer> list1 = Listgenerator();
 
-        System.out.println("The numbers dividable by 5 are: " + dividable5numbs.toString());
+        System.out.println("this is the generated list" + list1);
 
-        System.out.println("The numbers undividable by 2,3 and 5 are: " + remainingnumbs.toString());
+        System.out.println("max nr in list is: " + Maxcheck(list1));
 
-        System.out.println("The biggestnr from this list is:" + maxvalue);
+        System.out.println("sum of the two min in list is: " + sumof2min(list1));
 
-        System.out.println("The smallestnr from this list are:" + minvalue1 + " and "+minvalue2);
+        System.out.println("The even nrs are: " + Evennumlist(list1));
+
+        System.out.println("The nrs dividable by 3 are: " + Dividableby3(list1));
+
+        System.out.println("The nrs dividable by 5 are: " + Dividableby5(list1));
+
+        System.out.println("The nrs undividable by 2,3 and 5 are: " + Undividable(list1));
+
+        ArrayList<Integer> list1asarray = new ArrayList<>(list1);
         
-        int totalmin = minvalue1 + minvalue2; 
+        bubbleSort(list1asarray);
 
-        System.out.println("These values added up together are:" + totalmin);
-        System.out.println("size test : " + numbers2.size());
-
-        
-         }
-}
+        System.out.println("Sorted list: " + list1asarray);
+                
+            }        
+        }
+    
+    
+    
+    
+    
+    
+    
+    
