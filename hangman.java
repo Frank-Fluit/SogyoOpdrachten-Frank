@@ -1,15 +1,9 @@
-// The line below import the relevant scanner class
-
 import java.util.*;
 
 public class hangman
 {
     private static int guessleft = 10;
 
-
-
-
-    // Method -- Generate random word
     public static String Selectword(){
 
         String[] dictionary = {"java",
@@ -52,7 +46,6 @@ public class hangman
 
         String[] prompt = new String[lengthword];
 
-        // Fill the array with the default value
         Arrays.fill(prompt, "_");
 
         System.out.println(Arrays.toString(prompt));
@@ -62,63 +55,57 @@ public class hangman
        
         
     }
-    // Method -- Print the current progress
-    // Method -- Print update after guess
-    // Method? -- Ask for input user
-
+    
 
     public static String Takeinput(){
-        // First an object of the scanner class is created
+        
         Scanner scan = new Scanner(System.in);
+        
+        System.out.print("Enter your guess: ");
 
-        // Here the user is asked to enter an integer (year)
-        System.out.print("Enter your hangman guess: ");
-
-        String userguess = scan.nextLine();  // Read user input
-        System.out.println("The entered string is " + userguess);  // Output user input
-
-
-        //Here the scan object is closed again
-        //scan.close();
+        String userguess = scan.nextLine();  
 
         return(userguess);
     }
 
-    public static void Updateprompt(String userguess, String chosenword, String[] firstprompt){
-
-        System.out.println("userguess is: " + userguess);
-        System.out.println("chosenword is: " + chosenword);
-
-        int lengthword = chosenword.length();
-        
-
-        
-
+    public static void Updateprompt(String userguess, String chosenword, String[] firstprompt, ArrayList<String> wrongguesses){
+ 
         for (int i = 0; i < chosenword.length(); i++) {
+
                 char letter = chosenword.charAt(i);
+
             if (userguess.equals(String.valueOf(letter))) {
-                System.out.println("there is a match");
 
                 firstprompt[i] = String.valueOf(letter);
 
-                System.out.println(Arrays.toString(firstprompt));
-
-                //String[] newprompt = new String[lengthword];
-
                 }
             }
-
+        
+        
         if(Arrays.asList(firstprompt).contains(userguess) == false){
+
             guessleft = guessleft - 1;
 
-            // add to wronglist and type it here
+            wrongguesses.add(userguess);
+
+            
         }
 
-        System.out.println(guessleft);
+        if(guessleft == 0){
 
-        if(guessleft==0){
-            System.out.println("you failed the game");
+            System.out.println("You can ran out of guesses, more luck next time!");
+
+            System.exit(0);
         }
+
+        
+        System.out.println(Arrays.toString(firstprompt));
+
+        System.out.print("Guesses left:" + guessleft);
+
+        System.out.println(" The wrongguesses are" + wrongguesses);
+
+        
         }
 
     
@@ -129,29 +116,27 @@ public class hangman
     public static void main(String args[])
     {
         String chosenword = Selectword();
-        //System.out.println(chosenword);
+        
         String[] firstprompt = Showprompt(chosenword);
 
-        //String userguess = Takeinput();
-
-        //Updateprompt(userguess,chosenword, firstprompt);
-        
+        ArrayList<String> wrongguesses = new ArrayList<>();
 
         String notfinished = "_";
         
-
-
         while(Arrays.asList(firstprompt).contains(notfinished)){
 
             String userguess = Takeinput();
 
-            Updateprompt(userguess,chosenword, firstprompt);
+            Updateprompt(userguess,chosenword, firstprompt, wrongguesses);
+        }
+        System.out.println("congrats you won the game");
+        
 
             
 
 
 
-        //Add here what needs     
-    }
+        
+
 }
 }
