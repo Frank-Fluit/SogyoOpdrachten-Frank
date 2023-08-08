@@ -46,10 +46,7 @@ public class Quote {
             char currentChar = input.charAt(i);
     
             
-            if (currentChar == '.' || currentChar == '?' || currentChar == '!') {
-                capitalizeNextChar = true; 
-                result.append(currentChar); 
-            } else if (Character.isLetterOrDigit(currentChar) && capitalizeNextChar) {
+             if (Character.isLetterOrDigit(currentChar) && capitalizeNextChar) {
                 
                 result.append(Character.toUpperCase(currentChar));
                 capitalizeNextChar = false; 
