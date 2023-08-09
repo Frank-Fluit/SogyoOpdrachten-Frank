@@ -1,56 +1,44 @@
-// Main File
-
-// Use the objects of the Fraction class here
-
 package nl.sogyo.javaopdrachten;
 
 
 public class FracCalc{
     public static void main(String [] args){
 
-        System.out.println("Test string print");
 
-        // fraction1:  1/3
         Fraction Fraction1 = new Fraction(1, 13);
-        // fraction2:  1/6
         Fraction Fraction2 = new Fraction(1,6);
 
 
+        
 
-        System.out.println(Fraction1.toDecimalNotation());
-        System.out.println(Fraction1.toString());
+        System.out.println("toDecimal: "+Fraction1.toDecimalNotation());
 
-        //Adding
+        System.out.println("toString: "+Fraction1.toString());
 
-        Fraction addnrtoFraction = Fraction1.add(1);
+        Fraction addNrtoFraction = Fraction1.add(1);
+        System.out.println("addNrtoFraction: " + addNrtoFraction);
+
         Fraction addFractiontoFraction = Fraction1.add(Fraction2);
+        System.out.println("addFractiontoFraction: " + addFractiontoFraction);
 
-        System.out.println(addnrtoFraction);
-        System.out.println(addFractiontoFraction);
+        Fraction substractNrfromFraction = Fraction1.subtract(1);
+        System.out.println("subtractNrfromfraction: " + substractNrfromFraction);
 
-        //Substracting
-
-        Fraction substractnrfromFraction = Fraction1.subtract(1);
         Fraction substractFractionfromFraction = Fraction1.subtract(Fraction2);
+        System.out.println("subtractFractionfromFraction: " + substractFractionfromFraction);
+  
+        Fraction multiplyNrbyFraction = Fraction1.multiply(2);
+        System.out.println("multplyNrbyFraction: " + multiplyNrbyFraction);
 
-        System.out.println(substractnrfromFraction);
-        System.out.println(substractFractionfromFraction);
-
-        //Multiplying
-
-        Fraction multiplynrbyFraction = Fraction1.multiply(2);
         Fraction multiplyFractionbyFraction = Fraction1.multiply(Fraction2);
+        System.out.println("multiplyFractionbyFraction: " + multiplyFractionbyFraction);
 
-        System.out.println(multiplynrbyFraction);
-        System.out.println(multiplyFractionbyFraction);
+        Fraction divideFractionbyNr =  Fraction1.divide(2);
+        System.out.println("divideFractionbyNr: " + divideFractionbyNr);
 
-        //Dividing
+        Fraction divideFractionbyFraction = Fraction1.divide(Fraction2);
+        System.out.println("divideFractionbyFraction: " + divideFractionbyFraction);
 
-        Fraction divideFractionbynr =  Fraction1.divide(2);
-        Fraction divideFractionbyfraction = Fraction1.divide(Fraction2);
-
-        System.out.println(divideFractionbynr);
-        System.out.println(divideFractionbyfraction);
 
 
     }
