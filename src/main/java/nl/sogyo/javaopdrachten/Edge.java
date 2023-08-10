@@ -1,22 +1,15 @@
 package nl.sogyo.javaopdrachten;
 
-import java.util.*;
-
 public class Edge{
 
+    String originNode;
+    String destinationNode;
+    String answer;
 
-    //ArrayList<String> nodes;
-    //answer
-    //origin
-    //destination
-
-  
-
-//public Edge(ArrayList<String> nodes) {
-    //this.nodes = nodes;
+public Edge(String originNode, String destinationNode, String answer) {
     
-//}
-
-
-
+    this.originNode = originNode;
+    this.destinationNode = destinationNode;
+    this.answer = answer;    
+}
 }
