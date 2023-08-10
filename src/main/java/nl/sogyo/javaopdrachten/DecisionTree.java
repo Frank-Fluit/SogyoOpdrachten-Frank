@@ -9,11 +9,14 @@ import java.util.Scanner;
 public class DecisionTree{
 public static void main(String [] args){
 
+    //7 potential methods
     
-    // Get all the info in list form
+    //Read tree inputfile
     String PATH = "/home/frank/java-opdrachten-frank/src/main/resources/intermediate/decision-tree-data.txt";
     Tree myFirstTree = new Tree();
     ArrayList<String> fileLines = myFirstTree.readTreeInputFile(PATH);
+
+    //Separate nodes and edges
     ArrayList<ArrayList<String>> nodesAndEdgesSeparated = myFirstTree.separateNodesAndEdges(fileLines);
     ArrayList<String> edgeStringList = nodesAndEdgesSeparated.get(0);
     ArrayList<String> nodesStringList = nodesAndEdgesSeparated.get(1);
@@ -27,14 +30,13 @@ public static void main(String [] args){
         destinationNodes.add(destinationNode.trim());
     }
     
-    //makes list of node objects: add mame and type
+    //Nodes are initiated and put in edgelist
     ArrayList<Node> nodesAsObjects = new ArrayList<>();
     for(String line: nodesStringList){
         String[] parts = line.split(",");
         String nodename = parts[0].trim();
         String questionOrAnswer = parts[1].trim();
         char finalChar = questionOrAnswer.charAt(questionOrAnswer.length() - 1);
-        System.out.println(finalChar);
         Boolean question = false;
         if(Character.toString(finalChar).equals( "?")){
             question = true;
@@ -46,58 +48,72 @@ public static void main(String [] args){
         nodesAsObjects.add(node);
     }
 
-    // finds beginnode
+    //Edges are initiated and put in edgelist
+    ArrayList<Edge> edgesAsObjects = new ArrayList<>();
+    for(String line: edgeStringList){
+        String[] parts = line.split(",");
+        String originNode = parts[0].trim();
+        String destinationNode = parts[1].trim();
+        String answer = parts[2].trim();
+    
+        Edge edge = new Edge(originNode,destinationNode,answer);
+        edgesAsObjects.add(edge);
+    }
+
+    // finds startnode is found
     String beginNode = null;
     for(String line:nodesStringList){
         String[] parts = line.split(",");
         String nodename = parts[0];
         if(!destinationNodes.contains(nodename)){
-            System.out.println(nodename + " is the beginnode");
-            beginNode = nodename;
-                
+            beginNode = nodename;   
+        }
+    }
+    Node currentNode = null;
+    for (Node node : nodesAsObjects){
+        if(node.name.equals(beginNode)){
+            currentNode = node;
         }
     }
 
+    // Runtree
     Boolean endTreeReached = false;
-
-    System.out.println("Beginnode = " + beginNode);
-
-    for(Node node:nodesAsObjects){
-        System.out.println(node.name);
-        System.out.println(node.question);
-        System.out.println(node.questionOrAnswerLine);
-
-    }
-// hints found online:
-
     while (!endTreeReached) {
-        // Logic to process nodes and perform desired operations
-    
-        // For example, you can iterate through your nodesAsObjects list
-        for (Node node : nodesAsObjects) {
-            // Perform operations based on the node properties
-            // For instance, you can check if it's a question node and take actions accordingly
-            if (node.question) {
-                // Implement logic for handling question nodes
-            } else {
-                // Implement logic for handling answer nodes
+        
+        Boolean newNodeFound = false;
+        System.out.println(currentNode.questionOrAnswerLine);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Beantwoord de vraag volgens het volgende format: {Ja}/{Nee}, denk aan hoofdletter ");
+        String inputUser = scanner.nextLine(); 
+        System.out.println("De optie die je gekozen hebt is: " + inputUser);
+        
+        for (Edge edge : edgesAsObjects) {
+            
+            if (inputUser.equals(edge.answer) && currentNode.name.equals(edge.originNode)) {
+  
+                while(!newNodeFound){
+
+                    for(Node node: nodesAsObjects){
+
+                        if(edge.destinationNode.equals(node.name)){
+                            
+                            currentNode = node;
+                            newNodeFound = true;
+
+                            if(currentNode.question == false){
+
+                                System.out.println("The tree you are looking for is: " + currentNode.questionOrAnswerLine);
+                                endTreeReached =true;
+                            
+                            }
+                        }
+                    }
+                } 
             }
         }
-    
-        // You might update endTreeReached based on certain conditions
-        // For example, if you reach a specific node, you might set endTreeReached to true
-        // endTreeReached = true; // Replace this with your actual condition
-    }
-
-    //More code here
-
-    
-
-
-
-
-    } //end main
-} // end class
+    } // end main while loop tree 
+} //end main
+}// end class
 
 
 
