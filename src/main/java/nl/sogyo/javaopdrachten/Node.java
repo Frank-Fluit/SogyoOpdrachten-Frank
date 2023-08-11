@@ -16,15 +16,6 @@ public Node(Boolean question, String name, String questionorAnswerLine) {
 }
 
 
-public static ArrayList<String> getDestinationNodes(ArrayList<Edge> edgesAsObjects){
-ArrayList<String> destinationNodes = new ArrayList<>();
-    for(Edge edge: edgesAsObjects){
-        String destinationNode = edge.destinationNode;
-        destinationNodes.add(destinationNode.trim());
-    }
-    return destinationNodes;
-}
-
 public static ArrayList<Node> nodesAsObjects(ArrayList<String> nodesStringList){
 
 
@@ -48,6 +39,16 @@ public static ArrayList<Node> nodesAsObjects(ArrayList<String> nodesStringList){
 
     return nodesAsObjects;
 }
+
+public static ArrayList<String> getDestinationNodes(ArrayList<Edge> edgesAsObjects){
+ArrayList<String> destinationNodes = new ArrayList<>();
+    for(Edge edge: edgesAsObjects){
+        String destinationNode = edge.destinationNode;
+        destinationNodes.add(destinationNode.trim());
+    }
+    return destinationNodes;
+}
+
 
 public static Node findCurrentNode(ArrayList<Node> nodesAsObjects, ArrayList<String> destinationNodes){
     
